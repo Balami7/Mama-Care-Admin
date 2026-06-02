@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { HeartPulse } from "lucide-react"; 
+import { HeartPulse } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -27,18 +27,22 @@ export default function LoginPage() {
     try {
       const res = await signIn("credentials", {
         redirect: false,
-        email,
+        email: email.trim().toLowerCase(),
         password,
+        // Pass rememberMe to the NextAuth authorizing backend
+        rememberMe: rememberMe.toString(), 
       });
 
       if (res?.error) {
         setError("Invalid email or password. Please try again.");
-      } else {
+      } else if (res?.ok) {
         router.push("/dashboard");
         router.refresh();
+      } else {
+        setError("An unexpected authentication error occurred.");
       }
     } catch (err) {
-      setError("An unexpected error occurred.");
+      setError("An unexpected error occurred. Please check your connection.");
     } finally {
       setIsLoading(false);
     }
@@ -51,16 +55,23 @@ export default function LoginPage() {
         {/* Left Side - Login Form */}
         <div className="p-10 lg:p-16 flex flex-col justify-center">
           <div className="mb-10">
-            <Image src="/logo.png" alt="MamaCare Logo" width={180} height={60} className="h-12 w-auto" priority />
+            <Image
+              src="/logo.png"
+              alt="MamaCare Logo"
+              width={180}
+              height={60}
+              className="h-12 w-auto object-contain"
+              priority
+            />
           </div>
-          
+
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-gray-900">Holla, Welcome Back</h1>
             <p className="text-gray-600 mt-2">Hey, welcome back to your special place</p>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg">
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg" role="alert">
               {error}
             </div>
           )}
@@ -68,39 +79,73 @@ export default function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <Label htmlFor="email">Email Address</Label>
-              <Input id="email" type="email" placeholder="name@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="mt-2" disabled={isLoading} />
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="mt-2"
+                disabled={isLoading}
+                autoComplete="email"
+              />
             </div>
-            
+
             <div>
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="••••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required className="mt-2" disabled={isLoading} />
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="mt-2"
+                disabled={isLoading}
+                autoComplete="current-password"
+              />
             </div>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Checkbox id="remember" checked={rememberMe} onCheckedChange={(checked) => setRememberMe(!!checked)} disabled={isLoading} />
-                <Label htmlFor="remember" className="text-sm font-normal cursor-pointer">
+                <Checkbox
+                  id="remember"
+                  checked={rememberMe}
+                  onCheckedChange={(checked) => setRememberMe(!!checked)}
+                  disabled={isLoading}
+                />
+                <Label htmlFor="remember" className="text-sm font-normal cursor-pointer select-none">
                   Remember me
                 </Label>
               </div>
-              <Link href="/forgotpassword" className="text-sm text-pink-600 hover:underline">
+              <Link href="/forgotpassword" className="text-sm text-pink-600 hover:underline font-medium">
                 Forgot Password?
               </Link>
             </div>
 
-            <Button type="submit" className="w-full py-6 text-base bg-pink-600 hover:bg-pink-700" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full py-6 text-base bg-pink-600 hover:bg-pink-700 transition-colors"
+              disabled={isLoading}
+            >
               {isLoading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
         </div>
 
-        {/* Right Side - Image */}
+        {/* Right Side - Decorative/Branding Panel */}
         <div className="hidden md:block relative bg-gradient-to-br from-purple-600 to-purple-700">
           <div className="absolute inset-0 flex items-center justify-center p-8">
-            <Image src="/1.png" alt="MamaCare Mother and Child" width={500} height={600} className="object-contain drop-shadow-2xl" priority />
+            <Image
+              src="/1.png"
+              alt="MamaCare Mother and Child"
+              width={500}
+              height={600}
+              className="object-contain drop-shadow-2xl"
+              priority
+            />
           </div>
-          
-          {/* Top Right Decorative Element - Lucide Icon */}
           <div className="absolute top-10 right-10">
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 flex items-center justify-center">
               <HeartPulse className="w-8 h-8 text-white stroke-[1.5]" />
