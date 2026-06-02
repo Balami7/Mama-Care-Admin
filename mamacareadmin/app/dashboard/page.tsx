@@ -10,13 +10,22 @@ import { Users, Baby, Calendar, Bell, Users2 } from "lucide-react";
 export default function DashboardPage() {
   const { data: session } = useSession();
   const [liveStats, setLiveStats] = useState<any>(null);
+  // Track loading state for the chart/stats
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchDashboardMetrics() {
-      const res = await fetch("/api/dashboard/stats");
-      if (res.ok) {
-        const data = await res.json();
-        setLiveStats(data);
+      try {
+        setIsLoading(true);
+        const res = await fetch("/api/dashboard/stats");
+        if (res.ok) {
+          const data = await res.json();
+          setLiveStats(data);
+        }
+      } catch (error) {
+        console.error("Failed fetching dashboard metrics:", error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchDashboardMetrics();
@@ -34,7 +43,6 @@ export default function DashboardPage() {
     <div className="p-6 lg:p-8 space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          {/* Dynamically extracts the actual signed-in user's name */}
           <h1 className="text-3xl font-semibold text-foreground">
             Welcome back, {session?.user?.name || "User"}!
           </h1>
@@ -53,7 +61,10 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2">
-          <UserGrowthChart />
+          <UserGrowthChart 
+            data={liveStats?.chartData || []} 
+            isLoading={isLoading} 
+          />
         </div>
         <div className="xl:col-span-3">
           <RecentUsersTable />

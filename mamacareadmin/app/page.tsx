@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -29,8 +28,7 @@ export default function LoginPage() {
         redirect: false,
         email: email.trim().toLowerCase(),
         password,
-        // Pass rememberMe to the NextAuth authorizing backend
-        rememberMe: rememberMe.toString(), 
+        rememberMe: rememberMe.toString(),
       });
 
       if (res?.error) {
@@ -52,7 +50,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="max-w-5xl w-full bg-white rounded-3xl shadow-xl overflow-hidden grid md:grid-cols-2">
         
-        {/* Left Side - Login Form */}
+        
         <div className="p-10 lg:p-16 flex flex-col justify-center">
           <div className="mb-10">
             <Image
@@ -64,7 +62,7 @@ export default function LoginPage() {
               priority
             />
           </div>
-
+          
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-gray-900">Holla, Welcome Back</h1>
             <p className="text-gray-600 mt-2">Hey, welcome back to your special place</p>
@@ -91,7 +89,7 @@ export default function LoginPage() {
                 autoComplete="email"
               />
             </div>
-
+            
             <div>
               <Label htmlFor="password">Password</Label>
               <Input
@@ -134,21 +132,19 @@ export default function LoginPage() {
           </form>
         </div>
 
-        {/* Right Side - Decorative/Branding Panel */}
-        <div className="hidden md:block relative bg-gradient-to-br from-purple-600 to-purple-700">
-          <div className="absolute inset-0 flex items-center justify-center p-8">
-            <Image
-              src="/1.png"
-              alt="MamaCare Mother and Child"
-              width={500}
-              height={600}
-              className="object-contain drop-shadow-2xl"
-              priority
-            />
-          </div>
-          <div className="absolute top-10 right-10">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 flex items-center justify-center">
-              <HeartPulse className="w-8 h-8 text-white stroke-[1.5]" />
+        
+        <div className="hidden md:block relative w-full h-full bg-gray-50">
+          <Image
+            src="/1.png"
+            alt="MamaCare Mother and Child"
+            fill
+            className="object-cover"
+            priority
+          />
+          
+          <div className="absolute top-10 right-10 z-10">
+            <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 flex items-center justify-center border border-white/20">
+              <HeartPulse className="w-8 h-8 text-pink-600 stroke-[1.5]" />
             </div>
           </div>
         </div>
