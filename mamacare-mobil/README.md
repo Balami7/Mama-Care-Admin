@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# MamaCare Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is the `mamacare-mobile` Expo app for the MamaCare project.
 
-## Get started
+## Prerequisites
 
-1. Install dependencies
+- Node.js 18 or later
+- npm 10 or later
+- Expo CLI is optional but helpful for local development:
+  ```bash
+  npm install -g expo-cli
+  ```
 
-   ```bash
-   npm install
-   ```
+## Install dependencies
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+From the `mamacare-mobile` folder:
 
 ```bash
-npm run reset-project
+cd mamacare-mobil
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Run locally
 
-## Learn more
+Start the Expo development server:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Or use one of the platform-specific scripts:
 
-## Join the community
+```bash
+npm run android
+npm run ios
+npm run web
+```
 
-Join our community of developers creating universal apps.
+After the server starts, choose one of these options:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Open in Expo Go on a physical device
+- Launch an Android emulator
+- Launch an iOS simulator
+- Open in the web browser
+
+## Available scripts
+
+- `npm start` – start the Expo development server
+- `npm run android` – start Expo and open the Android device/emulator
+- `npm run ios` – start Expo and open the iOS simulator
+- `npm run web` – start Expo for web development
+- `npm run lint` – run Expo's ESLint checks
+- `npm run reset-project` – reset starter project files (moves starter code to `app-example` and creates a blank `app` directory)
+
+## Key dependencies
+
+This app is built with Expo Router and React Native, including:
+
+- `expo` – Expo SDK
+- `expo-router` – file-based app routing
+- `react-native` – React Native runtime
+- `react` / `react-dom`
+- `nativewind` / `tailwindcss` – styling utilities
+- `react-navigation` packages – navigation support
+- `expo-image`, `expo-splash-screen`, `expo-status-bar`, `expo-constants`
+- `react-native-gesture-handler`, `react-native-reanimated`, `react-native-safe-area-context`, `react-native-screens`
+
+## Project structure
+
+- `app/` – main app source files and Expo Router routes
+- `assets/` – app images and static assets
+- `global.css` – global styling
+- `package.json` – dependency and script definitions
+- `tsconfig.json` – TypeScript configuration
+
+## Notes
+
+- This project uses Expo Router and file-based routing.
+- If you see issues with native modules, ensure you are using the Expo-managed workflow and run `npm install` again.
+- For more Expo details, visit https://docs.expo.dev
