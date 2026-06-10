@@ -1,0 +1,48 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# Local planning/runbook docs (do not push)
+MAMACARE_PRD_ALIGNMENT_AND_IMPLEMENTATION_GUIDE.txt
+PREGNANCY_SETUP_HOME_SUMMARY_FEATURE_GUIDE.txt
+PREGNANCY_FEATURE_TEST_RUNBOOK.txt
+MAMACARE_BACKEND_BUILD_GUIDE.txt
+APPOINTMENT_FEATURE_INDUSTRY_GRADE_GUIDE.txt
+APPOINTMENT_REMINDER_CHECKLIST_TEST_GUIDE.txt
+APPOINTMENT_TEST_RUN_RESULTS.txt
+MEDICATION_REMINDER_TEST_REPORT.txt
+MEDICATION_REMINDER_FEATURE_PRO_GRADE_GUIDE.txt
+MEDICATION_REMINDER_FEATURE_PRO_GRADE_GUIDE.txt
+WALK_EXERCISE_FEATURE_PRO_GRADE_GUIDE.txt
+HEALTH_TIPS_FEATURE_PRO_GRADE_GUIDE.txt
+BABY_GROWTH_FEATURE_PRO_GRADE_GUIDE.txt
