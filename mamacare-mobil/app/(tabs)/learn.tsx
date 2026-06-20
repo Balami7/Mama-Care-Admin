@@ -1,13 +1,18 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack } from "expo-router";
+import "../global.css";
 
-export default function Screen() {
+export default function RootLayout() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff", alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ fontSize: 18, fontWeight: "700", color: "#2D7A4F" }}>
-        Coming Soon
-      </Text>
-    </SafeAreaView>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="onboard" />
+      <Stack.Screen name="(auth)/sign-in" />
+      <Stack.Screen name="(auth)/sign-up" />
+      <Stack.Screen name="(onboarding)/welcome" />
+      <Stack.Screen name="(onboarding)/know-you" />
+      <Stack.Screen name="(onboarding)/due-date" />
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="(profile)" />
+    </Stack>
   );
 }
